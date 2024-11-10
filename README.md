@@ -15,7 +15,7 @@ A Flask-based web application designed for hotel managers and housekeepers to tr
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/hotel-inventory.git
+git clone https://github.com/businistry/hotel-inventory.git
 cd hotel-inventory
 ```
 
