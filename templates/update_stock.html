@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Update Stock: {{ item.name }}</h3>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <p><strong>Current Quantity:</strong> {{ item.quantity }} {{ item.unit }}</p>
+                    <p><strong>Minimum Quantity:</strong> {{ item.min_quantity }} {{ item.unit }}</p>
+                </div>
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="transaction_type" class="form-label">Transaction Type</label>
+                        <select class="form-select" id="transaction_type" name="transaction_type" required>
+                            <option value="restock">Restock</option>
+                            <option value="consumption">Consumption</option>
+                            <option value="adjustment">Adjustment</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity_change" class="form-label">Quantity Change</label>
+                        <input type="number" class="form-control" id="quantity_change" name="quantity_change" required>
+                        <small class="form-text text-muted">Use positive numbers for adding stock and negative numbers for removing stock.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes</label>
+                        <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Update Stock</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

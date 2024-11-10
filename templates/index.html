@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Inventory Items</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Min. Quantity</th>
+                        <th>Unit</th>
+                        <th>Last Updated</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr {% if item.quantity <= item.min_quantity %}class="table-warning"{% endif %}>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.category }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.min_quantity }}</td>
+                        <td>{{ item.unit }}</td>
+                        <td>{{ item.last_updated.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            <a href="{{ url_for('update_stock', item_id=item.id) }}" class="btn btn-sm btn-primary">Update Stock</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h4 class="card-title mb-0">Low Stock Alert</h4>
+            </div>
+            <div class="card-body">
+                {% if low_stock_items %}
+                <ul class="list-group">
+                    {% for item in low_stock_items %}
+                    <li class="list-group-item">
+                        <h6>{{ item.name }}</h6>
+                        <p class="mb-0">Current: {{ item.quantity }} {{ item.unit }}</p>
+                        <p class="mb-0">Minimum: {{ item.min_quantity }} {{ item.unit }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No items are running low on stock.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

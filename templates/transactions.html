@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Transaction History</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date/Time</th>
+                <th>Item</th>
+                <th>Transaction Type</th>
+                <th>Quantity Change</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ transaction.item.name }}</td>
+                <td>
+                    <span class="badge {% if transaction.transaction_type == 'restock' %}bg-success
+                        {% elif transaction.transaction_type == 'consumption' %}bg-danger
+                        {% else %}bg-warning{% endif %}">
+                        {{ transaction.transaction_type }}
+                    </span>
+                </td>
+                <td>{{ transaction.quantity_change }}</td>
+                <td>{{ transaction.notes or '-' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

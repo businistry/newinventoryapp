@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add New Item</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="Linens">Linens</option>
+                            <option value="Toiletries">Toiletries</option>
+                            <option value="Cleaning Supplies">Cleaning Supplies</option>
+                            <option value="Amenities">Amenities</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Initial Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" required min="0">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="min_quantity" class="form-label">Minimum Quantity</label>
+                        <input type="number" class="form-control" id="min_quantity" name="min_quantity" required min="0">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="unit" class="form-label">Unit</label>
+                        <select class="form-select" id="unit" name="unit" required>
+                            <option value="">Select a unit</option>
+                            <option value="pieces">Pieces</option>
+                            <option value="sets">Sets</option>
+                            <option value="boxes">Boxes</option>
+                            <option value="bottles">Bottles</option>
+                            <option value="rolls">Rolls</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
